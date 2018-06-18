@@ -1,0 +1,48 @@
+$columns: 12;
+$rows: 50;
+
+:root {
+  --col-span: 1;
+  --row-span: 1;
+}
+
+@mixin col-x {
+  @for $i from 1 through $columns {
+    .col#{$i} { -ms-grid-column: $i; grid-column: $i / span var(---col-span); }
+  }
+}
+
+@mixin grid-x {
+  @for $i from 1 through $columns {
+    .grid#{$i} {
+      display: -ms-grid;
+      display: grid;
+      -ms-grid-columns: (minmax(0, 1fr)) [$i];
+      grid-template-columns: repeat($i, minmax(0, 1fr));
+    }
+  }
+}
+
+@mixin row-x {
+  @for $i from 1 through $rows {
+    .row#{$i} { -ms-grid-row: $i; grid-row: $i / span var(---row-span); }
+  }
+}
+
+@mixin colspan-x {
+  @for $i from 1 through $columns {
+    .colspan#{$i} { -ms-grid-column-span: $i; --col-span: #{$i}; }
+  }
+}
+
+@mixin rowspan-x {
+  @for $i from 1 through $rows {
+    .rowspan#{$i} { -ms-grid-row-span: $i; --row-span: #{$i}; }
+  }
+}
+
+@include col-x;
+@include grid-x;
+@include row-x;
+@include colspan-x;
+@include rowspan-x;
